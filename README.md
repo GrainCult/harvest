@@ -5,7 +5,7 @@ A package manager for GrainOS written in C/Lua
 
 ### Config
 
-All config files are stored `~/.config/harvest/harvest.lua`
+All config files are stored in `~/.config/harvest/harvest.lua`
 
 #### Example
 ```lua
@@ -16,7 +16,7 @@ DoesElevation = false
 ```
 
 ### Commands
-- Installing:
+- Installing/Reinstalling:
     - `harvest discord`
 - Removing:
     - `harvest --remove discord` or `harvest -r discord`
@@ -27,7 +27,7 @@ DoesElevation = false
     - To upgrade the repo you can use --fetch
     - `harvest --fetch` or `harvest -f`
 - Clean:
-    - Clean unused depencices
+    - Clean unused dependencies
     - `harvest --clean` or `harvest -c`
 - Help:
     - `harvest --help` or `harvest -h`
