@@ -1,14 +1,15 @@
 # harvest
 A package manager for GrainOS with plugin support written in Lua  
-But where are configs stored?!?! In ~/.config/harvest/harvest.lua  
-how it works and what are they called:
+
+  But where are configs stored?!?! In ~/.config/harvest/harvest.lua
+
+=======
 # Standard
 
 ## Terms
 - Fields: Mirrors
 - Silos: Repos
 - Grains/Crops: Packages
-
 
 ## Syntax
 
