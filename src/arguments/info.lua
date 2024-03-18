@@ -6,10 +6,12 @@ args["-i"] = function()
   infomation =
   {
     "",
-    "Harvest infomation",
-    "Version " .. _version,
-    "Total installed " .. 0, -- @soupyfx TODO replaced placeholder with installed packages 
-    "",
+    "##  ##",
+    "##  ##  harvest v".._version,
+    "######  installed crops "..0, -- @soupyfx TODO replaced placeholder with installed packages 
+    "##  ##  mirror ".."selectedmirror",
+    "##  ##",
+    ""
   }
   for x = 1, #infomation do print(infomation[x]) end
   return true

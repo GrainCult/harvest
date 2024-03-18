@@ -12,7 +12,7 @@ All config files are stored in `~/.config/harvest/harvest.lua`
 -- harvest config file
 -- Check graincult.com/docs/harvest/config for help
 
-DoesElevation = false
+config["value"] = "value"
 ```
 
 ### Commands
