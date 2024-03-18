@@ -7,14 +7,14 @@ _version = _version or "na"
 
 -- @soupyfx dont really know a good placement for this function
 -- but it needs to be a function because it is used many times
-local function grabCrops(from)
-  local crops = {}
-  for x = from, #arg do 
+-- local function grabCrops(from)
+--[[  local crops = {}
+  for x = from, #arg do
     if string.sub(arg[x], 1, 1) == "-" then break end
     table.insert(crops, arg[x])
   end
   return crops
-end
+end]]
 
 table.remove(arg,1)
 while true do
@@ -24,26 +24,32 @@ while true do
     {
       ["-r"] = function(i)
         if arg[i+1] then
-          local toRemove = grabCrops(i+1)
-
-          local text = ""
-          for i = 1, #toRemove do text = text..(i == 1 and "" or ", ")..toRemove[i] end
-          print("[HARVEST] Using this option would remove "..text..(#toRemove == 1 and " crop!" or " crops!"))
+          local args = arg
+          table.remove(args, 1)
+          if #args > 0 then
+            -- updatetargets is a table of all packages to be removed based on the arguments, can be appended to for dependencies and other things
+            -- TODO: read from imaginary cache to know what to remove
+            local updatetargets = args
+            io.write("[HARVEST] Using this option would remove the crops: \n\t"..table.concat(updatetargets, ",\n\t")..",\n") -- looks complicated but just to put it in text
+          end
         else
-          print("[HARVEST] Using this option would do nothing because no  was provided to delete!")
+           print("[HARVEST] Using this option would remove nothing!")
         end
         dobreak = true
       end,
 
       ["-u"] = function(i)
         if arg[i+1] then
-          local toUpdate = grabCrops(i+1)
-
-          local text = ""
-          for i = 1, #toUpdate do text = text..(i == 1 and "" or ", ")..toUpdate[i] end
-          print("[HARVEST] Using this option would update the "..(#toUpdate == 1 and "crop " or "crops ")..text.."!")
+          local args = arg
+          table.remove(args, 1)
+          if #args > 0 then
+            -- updatetargets is a table of all packages to be updated based on the arguments, can be appended to for dependencies and other things
+            -- TODO: read from imaginary cache to know what to update
+            local updatetargets = args
+            io.write("[HARVEST] Using this option would update the crops: \n\t"..table.concat(updatetargets, ",\n\t")..",\n")
+          end
         else
-           print("[HARVEST] Using this option would update all crops!")
+           print("[HARVEST] Using this option would update all crops!") -- looks complicated but just to put it in text
         end
         dobreak = true
       end,
@@ -64,7 +70,7 @@ while true do
       end,
 
       ["-i"] = function()
-        infomation = 
+        infomation =
         {
           "",
           "Harvest infomation",
@@ -110,12 +116,9 @@ while true do
       end
     end
     if dobreak then break end
-    
-    local toInstall = grabCrops(1)
 
-    local text = ""
-    for i = 1, #toInstall do text = text..(i == 1 and "" or ", ")..toInstall[i] end
-    print("[HARVEST] Using no options assumes you want to install "..text.."!")
+    -- here arg is the install targets
+    io.write("[HARVEST] Using no options assumes you want to install: \n\t"..table.concat(arg, ",\n\t")..",\n")
   else
     print("[HARVEST] you stupid or something")
   end
