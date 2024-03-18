@@ -6,7 +6,7 @@ c = c or {}
 _version = _version or "na"
 
 config = {}
-if c.exists(os.getenv("HOME").."/.config/harvest/harvest.lua") then
+if c.exists(os.getenv("HOME").."/.config/harvest/harvest.lua") == 0 then
   dofile(os.getenv("HOME").."/.config/harvest/harvest.lua")
 else
   dofile("/usr/lib/grain/harvest/config.lua")
