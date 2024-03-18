@@ -6,19 +6,19 @@ args["-h"] = function()
   help =
   {
     "",
-    "Usage: harvest [OPTION]...",
-    "Possible options:",
-    "├── -r --remove  │ Remove a crop instead of installing one",
-    "│   └── [STRING] │ The crop to remove",
-    "├── -u --update  │ Update installed crops to latest in local repository",
-    "├── -f --fetch   │ Update local repository",
-    "├── -l --list    │ List installed crops",
-    "├── -v --info    │ Show information about Harvest",
-    "└── -h --help    │ Shows this screen!!",
+    "Usage: harvest [OPTION] ...",
     "",
-    "Examples:",
-    "    harvest discord │ Installs the 'discord' crop",
-    "",
+    "Possible options:  * OPTIONAL",
+    "├── [STRING]      │ Installs a crop/s",
+    "├── -r --remove   │ Remove a crop/s instead of installing one",
+    "│   └── [STRING]  │ The crop/s to remove",
+    "├── -u --update   │ Update installed crops to latest in local repository",
+    "│   └── [STRING]* │ Update only selected crop/s",
+    "├── -f --fetch    │ Update local repository",
+    "├── -l --list     │ List installed crops",
+    "├── -i --info     │ Show information about harvest",
+    "└── -h --help     │ Shows this screen!",
+    ""
   }
   for x = 1, #help do print(help[x]) end
   return true

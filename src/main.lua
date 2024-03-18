@@ -5,6 +5,13 @@
 c = c or {}
 _version = _version or "na"
 
+config = {}
+if c.exists(os.getenv("HOME").."/.config/harvest/harvest.lua") == 0 then
+  dofile(os.getenv("HOME").."/.config/harvest/harvest.lua")
+else
+  dofile("/usr/lib/grain/harvest/config.lua")
+end
+
 args = {}
 dofile("/usr/lib/grain/harvest/arguments/remove.lua")
 dofile("/usr/lib/grain/harvest/arguments/update.lua")
@@ -16,20 +23,35 @@ dofile("/usr/lib/grain/harvest/arguments/help.lua")
 
 table.remove(arg,1)
 while true do
-  if #arg > 0 then
+  if #arg == 0 then
+    print("[HARVEST] you stupid or something (no arguments have been provided)")
+    break
+  end
 
-    local dobreak = false
-    for i = 1, #arg do
-      if args[arg[i]] then
-        dobreak = args[arg[i]](i)
+  local hasRunDisallowed = false
+  local function check(this)
+    if this == "-r" or this == "--remove" or this == "-u" or this == "--update" then
+      if hasRunDisallowed then
+        return false
+      end
+      hasRunDisallowed = true
+    end
+    return true
+  end
+
+  local doBreak = false
+  for i = 1, #arg do
+    if args[arg[i]] then
+      if check(arg[i]) then
+        doBreak = args[arg[i]](i)
+      else
+        io.write("[HARVEST] Cannot run --remove and --update in the same command "..arg[i].." has been skipped\n")
       end
     end
-    if dobreak then break end
-
-    -- here arg is the install targets
-    io.write("[HARVEST] Using no options assumes you want to install: \n\t"..table.concat(arg, ",\n\t")..",\n")
-  else
-    print("[HARVEST] you stupid or something")
   end
+  if doBreak then break end
+
+  -- here arg is the install targets
+  io.write("[HARVEST] Using no options assumes you want to install: \n\t"..table.concat(arg, ", ").."\n")
   break
 end

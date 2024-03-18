@@ -41,6 +41,16 @@ void error(lua_State* lua, int type)
 // }}}
 // {{{ lua functions
 
+int lua_exists(lua_State* lua)
+{
+  const char* f = luaL_checkstring(lua, -1);
+  if (access(f, F_OK)) {
+    lua_pushinteger(lua, 1);
+  } else {
+    lua_pushinteger(lua, 0);
+  }
+  return 1;
+}
 
 // }}}
 
@@ -59,9 +69,13 @@ int main(int argc, char* argv[])
   static const struct luaL_Reg lua_functions[] =
   {
     {
-      NULL,
-      NULL,
+      "exists",
+      lua_exists,
     },
+    {
+      NULL,
+      NULL,
+    }
   };
   luaL_register(lua, "c", lua_functions);
 
