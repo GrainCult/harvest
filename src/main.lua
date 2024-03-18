@@ -24,7 +24,7 @@ dofile("/usr/lib/grain/harvest/arguments/help.lua")
 table.remove(arg,1)
 while true do
   if #arg == 0 then
-    print("[HARVEST] you stupid or something (no arguments have been provided)")
+    print("[HARVEST] No arguments have been provided! (use -h for help)")
     break
   end
 
